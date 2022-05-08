@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Utvikling",
+    "paths": [
+      {
+        "id": 1,
+        "name": "Backend",
+        "areas": [
+          {
+            "id": 1,
+            "name": ".NET",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "C#"
+              },
+              {
+                "id": 2,
+                "name": "Entity Framework"
+              },
+              {
+                "id": 3,
+                "name": "Dapper"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Frontend",
+        "areas": [
+          {
+            "id": 1,
+            "name": "Web",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "React"
+              },
+              {
+                "id": 2,
+                "name": "Angular"
+              },
+              {
+                "id": 3,
+                "name": "Cypress"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

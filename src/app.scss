@@ -1,0 +1,65 @@
+@import 'colors';
+
+html {
+  font-size: 16px;
+}
+
+body {
+  background-color: $black2;
+  color: $rosewater;
+}
+
+h1,h2,h3,h4 {
+  margin: 0;
+}
+
+
+.competency {
+  margin-bottom: 0.5rem;
+  margin-left: 1rem;
+  border: 1px solid $lavender;
+  display: grid;
+  width: 15rem;
+
+  h4 {
+    text-align: center;
+    margin: 0.5rem 0 0 0;
+    color: $red;
+  }
+}
+
+.path {
+  margin-left: 1.5rem;
+}
+
+.area {
+  margin-left: 1.5rem;
+  padding: 0.5rem;
+  /* border: 1px solid $lavender; */
+}
+
+.discipline {
+  padding: 0.5rem;
+  margin-left: 1.5rem;
+  max-width: 40rem;
+}
+
+.rating {
+  display: flex;
+ justify-content: space-between; 
+
+  p {
+    text-align:center;
+    width: 2rem;
+    font-weight:bold;
+  }
+
+  p:hover {
+    cursor: pointer;
+    color: $mauve;
+  }
+
+  .selected {
+    color: $green;
+  }
+}
