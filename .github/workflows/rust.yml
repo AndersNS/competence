@@ -20,5 +20,7 @@ jobs:
       with:
         # Optional version of trunk to install(eg. 'v0.8.1', 'latest')
         version: 'latest'
+    - name: Fetch
+      run: cargo fetch
     - name: Build
       run: trunk build --release
