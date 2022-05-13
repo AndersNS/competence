@@ -32,17 +32,26 @@ pub fn competencies() -> Html {
             (),
         );
     }
+
+    let d = (*disciplines).clone();
+
     let on_disc_rating_changed = {
         Callback::from(move |pair: (u32, usize, usize, usize, usize)| {
-            log!(format!(
-                "New rating: {} for comp {} area: {} path: {} discipline: {}",
-                pair.0, pair.1, pair.2, pair.3, pair.4
-            ));
+            // log!(format!(
+            //     "New rating: {} for comp {} area: {} path: {} discipline: {}",
+            //     pair.0, pair.1, pair.2, pair.3, pair.4
+            // ));
+            let mut discs = (*disciplines).clone();
+            let disc = discs.iter_mut().find(|d| d.id == pair.4).unwrap(); // TODO Handle Option instead of unwrap
+            disc.set_interest(pair.0, pair.3, pair.2, pair.1);
+
+            disciplines.set(discs);
         })
     };
+
     html! {
         <div class="discipline">
-            <DisciplineList disciplines={(*disciplines).clone()} on_rating_changed={on_disc_rating_changed.clone()} />
+            <DisciplineList disciplines={d} on_rating_changed={on_disc_rating_changed.clone()} />
         </div>
     }
 }

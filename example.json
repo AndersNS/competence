@@ -13,15 +13,18 @@
             "competencies": [
               {
                 "id": 1,
-                "name": "C#"
+                "name": "C#",
+                "interest": 0
               },
               {
                 "id": 2,
-                "name": "Entity Framework"
+                "name": "Entity Framework",
+                "interest": 0
               },
               {
                 "id": 3,
-                "name": "Dapper"
+                "name": "Dapper",
+                "interest": 0
               }
             ]
           }
@@ -37,15 +40,18 @@
             "competencies": [
               {
                 "id": 1,
-                "name": "React"
+                "name": "React",
+                "interest": 0
               },
               {
                 "id": 2,
-                "name": "Angular"
+                "name": "Angular",
+                "interest": 0
               },
               {
                 "id": 3,
-                "name": "Cypress"
+                "name": "Cypress",
+                "interest": 0
               }
             ]
           }
