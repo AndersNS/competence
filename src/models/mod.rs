@@ -1,6 +1,6 @@
 use serde::Deserialize;
 
-#[derive(Clone, PartialEq, Deserialize)]
+#[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct Discipline {
     pub id: usize,
     pub name: String,
@@ -14,7 +14,7 @@ impl Discipline {
     }
 }
 
-#[derive(Clone, PartialEq, Deserialize)]
+#[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct Path {
     pub id: usize,
     pub name: String,
@@ -28,7 +28,7 @@ impl Path {
     }
 }
 
-#[derive(Clone, PartialEq, Deserialize)]
+#[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct Area {
     pub id: usize,
     pub name: String,
@@ -46,7 +46,7 @@ impl Area {
     }
 }
 
-#[derive(Clone, PartialEq, Deserialize)]
+#[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct Competency {
     pub id: usize,
     pub name: String,

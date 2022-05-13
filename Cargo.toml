@@ -7,6 +7,7 @@ edition = "2021"
 
 [dependencies]
 gloo-console = "0.2.1"
+gloo-storage = "0.2.1"
 reqwasm = "0.5.0"
 serde = { version = "1.0.137", features = ["derive"] }
 wasm-bindgen-futures = "0.4.30"

@@ -37,6 +37,7 @@ name = "competency"
 version = "0.1.0"
 dependencies = [
  "gloo-console",
+ "gloo-storage",
  "reqwasm",
  "serde",
  "wasm-bindgen-futures",
