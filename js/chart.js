@@ -1,4 +1,4 @@
-var myChart;
+var myChart = {};
 export function renderChart(element, data) {
   const configSample = {
     type: 'radar',
@@ -49,11 +49,11 @@ export function renderChart(element, data) {
     },
   };
 
-  if (myChart) {
-    myChart.data = data;
-    myChart.update();
+  if (myChart[element.id]) {
+    myChart[element.id].data = data;
+    myChart[element.id].update();
     return;
   }
-  myChart = new Chart(element, configSample);
+  myChart[element.id] = new Chart(element, configSample);
   return myChart;
 }

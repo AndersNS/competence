@@ -1,7 +1,5 @@
 use crate::competency::discipline_list::*;
-use crate::graph::*;
 use crate::models::*;
-use gloo_console::log;
 use gloo_storage::{errors::StorageError, LocalStorage, Storage};
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
@@ -24,7 +22,6 @@ struct CompetencyInterest {
 #[function_component(Competencies)]
 pub fn competencies() -> Html {
     let disciplines = use_state(|| vec![]);
-    let selected_area: UseStateHandle<Option<Area>> = use_state(|| None);
     {
         let discs = disciplines.clone();
         use_effect_with_deps(
@@ -73,10 +70,8 @@ pub fn competencies() -> Html {
         // Refactor so we dont use a giant tuple
         // Maybe add an impementation to CompKey from tuple, or something else
         let disciplines = disciplines.clone();
-        let selected_area = selected_area.clone();
         Callback::from(move |pair: (i32, usize, usize, usize, usize)| {
             let mut discs = (*disciplines).clone();
-            let selected_area = selected_area.clone();
             let disc = discs.iter_mut().find(|d| d.id == pair.4).unwrap();
             disc.set_interest(pair.0, pair.3, pair.2, pair.1);
             let comp_key = CompetencyInterest {
@@ -119,55 +114,8 @@ pub fn competencies() -> Html {
                 }
             }
 
-            // TODO This is broken
-            match (*selected_area).clone() {
-                Some(area) => {
-                    if area.id == comp_key.area_id {
-                        let disc = disc.clone();
-                        let area = disc
-                            .paths
-                            .into_iter()
-                            .find_map(|p| p.areas.into_iter().find(|a| a.id == comp_key.area_id))
-                            .unwrap();
-                        selected_area.set(Some(area));
-                    }
-                }
-                _ => {}
-            }
             disciplines.set(discs);
         })
-    };
-
-    let on_area_selected_callback = {
-        let selected_area = selected_area.clone();
-        let disciplines = disciplines.clone();
-        Callback::from(move |pair: (usize, usize, usize)| {
-            let selected_area = selected_area.clone();
-            let disc = disciplines.iter().find(|d| d.id == pair.2).unwrap(); // TODO Unwrap here
-            let path = disc.paths.iter().find(|p| p.id == pair.1).unwrap();
-            let area = path.areas.iter().find(|a| a.id == pair.0).unwrap();
-            selected_area.set(Some(area.clone()));
-        })
-    };
-
-    let graph = match (*selected_area).clone() {
-        Some(area) => {
-            let interest: Vec<i32> = area.competencies.iter().map(|c| c.interest).collect();
-            let labels: Vec<String> = area
-                .competencies
-                .iter()
-                .map(|c| c.name.to_string())
-                .collect();
-            html! {
-                <Graph interest={interest} labels={labels}/>
-            }
-        }
-        _ => {
-            html! {
-                <>
-                </>
-            }
-        }
     };
 
     html! {
@@ -175,11 +123,7 @@ pub fn competencies() -> Html {
             <DisciplineList
                 disciplines={(*disciplines).clone()}
                 on_rating_changed={on_disc_rating_changed.clone()}
-                on_area_selected={on_area_selected_callback.clone()}
             />
-            {
-                graph
-            }
         </div>
     }
 }

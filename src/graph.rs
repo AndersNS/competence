@@ -39,6 +39,7 @@ pub struct Config {
 
 #[derive(Clone, Properties, PartialEq)]
 pub struct GraphProps {
+    pub id: String,
     pub labels: Vec<String>,
     pub interest: Vec<i32>,
 }
@@ -57,7 +58,13 @@ fn draw_graph(interest: Vec<i32>, labels: Vec<String>, graph_ref: &NodeRef) {
 }
 
 #[function_component(Graph)]
-pub fn graph(GraphProps { labels, interest }: &GraphProps) -> Html {
+pub fn graph(
+    GraphProps {
+        id,
+        labels,
+        interest,
+    }: &GraphProps,
+) -> Html {
     let labels = labels.clone();
     let interest = interest.clone();
     let graph_ref = use_node_ref();
@@ -77,7 +84,7 @@ pub fn graph(GraphProps { labels, interest }: &GraphProps) -> Html {
     html! {
         <>
             <div style="width:40rem">
-              <canvas ref={graph_ref} id="myChart"></canvas>
+              <canvas ref={graph_ref} id={id.to_string()}></canvas>
             </div>
         </>
     }
