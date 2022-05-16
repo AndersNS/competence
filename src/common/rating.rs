@@ -2,8 +2,8 @@ use yew::prelude::*;
 
 #[derive(Clone, Properties, PartialEq)]
 pub struct RatingProps {
-    pub selected: Option<u32>,
-    pub on_click: Callback<u32>,
+    pub selected: Option<i32>,
+    pub on_click: Callback<i32>,
 }
 
 #[function_component(Rating)]

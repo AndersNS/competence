@@ -38,9 +38,12 @@ version = "0.1.0"
 dependencies = [
  "gloo-console",
  "gloo-storage",
+ "js-sys",
  "reqwasm",
  "serde",
+ "wasm-bindgen",
  "wasm-bindgen-futures",
+ "web-sys",
  "wee_alloc",
  "yew",
 ]

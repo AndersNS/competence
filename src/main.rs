@@ -4,8 +4,10 @@ use yew::prelude::*;
 #[global_allocator]
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
+pub mod bindings;
 pub mod common;
 mod competency;
+pub mod graph;
 pub mod models;
 
 #[function_component(App)]
