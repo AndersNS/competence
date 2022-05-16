@@ -46,20 +46,33 @@ h1,h2,h3,h4 {
 
 .rating {
   display: flex;
- justify-content: space-between; 
+  p:first-child { 
+    margin-left: 0.5rem;
+  }
+}
+
+.rating-list {
+  display: flex;
+  justify-content: space-between; 
+
 
   p {
     text-align:center;
-    width: 2rem;
+    width: 1rem;
+    margin-right: 0.25rem;
+    margin-left: 0.25rem;
     font-weight:bold;
+    border: 3px solid rgba($white, 0.4);
   }
 
   p:hover {
     cursor: pointer;
     color: $mauve;
+    border: 3px solid $mauve;
   }
 
   .selected {
     color: $green;
+    border: 3px solid $green;
   }
 }

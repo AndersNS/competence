@@ -27,7 +27,7 @@ pub fn competency_list(
 
                 <div class="competency">
                     <h4>{format!("{}", comp.name)}</h4>
-                    <rating::Rating selected={comp.interest} on_click={on_comp_rating_changed.clone()} />
+                    <rating::Rating selected={comp.interest} on_click={on_comp_rating_changed.clone()} name={"Interest"}/>
                 </div>
             }
         })

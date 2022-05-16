@@ -4,10 +4,17 @@ use yew::prelude::*;
 pub struct RatingProps {
     pub selected: Option<i32>,
     pub on_click: Callback<i32>,
+    pub name: String,
 }
 
 #[function_component(Rating)]
-pub fn rating(RatingProps { selected, on_click }: &RatingProps) -> Html {
+pub fn rating(
+    RatingProps {
+        selected,
+        on_click,
+        name,
+    }: &RatingProps,
+) -> Html {
     let on_click = on_click.clone();
 
     let range = (1..6)
@@ -29,7 +36,8 @@ pub fn rating(RatingProps { selected, on_click }: &RatingProps) -> Html {
 
     html! {
         <div class="rating">
-            {range}
+            <p>{name}{":"}</p>
+            <div class="rating-list">{range}</div>
         </div>
     }
 }
