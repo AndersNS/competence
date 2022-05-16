@@ -11,12 +11,12 @@ mod discipline_list;
 mod path_list;
 
 #[derive(Copy, Clone, Serialize, Deserialize, Debug)]
-struct CompetencyInterest {
+struct CompetencyRating {
     discipline_id: usize,
     path_id: usize,
     area_id: usize,
     comp_id: usize,
-    interest: i32,
+    rating_update: RatingUpdate,
 }
 
 #[function_component(Competencies)]
@@ -37,7 +37,7 @@ pub fn competencies() -> Html {
                         .unwrap();
 
                     // Loop over stored values and update the state
-                    let competencies: Result<Vec<CompetencyInterest>, StorageError> =
+                    let competencies: Result<Vec<CompetencyRating>, StorageError> =
                         LocalStorage::get("competencies");
                     match competencies {
                         Ok(comps) => {
@@ -45,8 +45,8 @@ pub fn competencies() -> Html {
                                 if let Some(index) =
                                     fetched_discs.iter().position(|c| c.id == ele.discipline_id)
                                 {
-                                    fetched_discs[index].set_interest(
-                                        ele.interest,
+                                    fetched_discs[index].update_rating(
+                                        ele.rating_update,
                                         ele.path_id,
                                         ele.area_id,
                                         ele.comp_id,
@@ -70,20 +70,20 @@ pub fn competencies() -> Html {
         // Refactor so we dont use a giant tuple
         // Maybe add an impementation to CompKey from tuple, or something else
         let disciplines = disciplines.clone();
-        Callback::from(move |pair: (i32, usize, usize, usize, usize)| {
+        Callback::from(move |pair: (RatingUpdate, usize, usize, usize, usize)| {
             let mut discs = (*disciplines).clone();
             let disc = discs.iter_mut().find(|d| d.id == pair.4).unwrap();
-            disc.set_interest(pair.0, pair.3, pair.2, pair.1);
-            let comp_key = CompetencyInterest {
+            disc.update_rating(pair.0, pair.3, pair.2, pair.1);
+            let comp_key = CompetencyRating {
                 discipline_id: pair.4,
                 path_id: pair.3,
                 area_id: pair.2,
                 comp_id: pair.1,
-                interest: pair.0,
+                rating_update: pair.0,
             };
 
             // TODO Move to a method
-            let competencies: Result<Vec<CompetencyInterest>, StorageError> =
+            let competencies: Result<Vec<CompetencyRating>, StorageError> =
                 LocalStorage::get("competencies");
             match competencies {
                 Ok(mut comps) => {
@@ -92,14 +92,15 @@ pub fn competencies() -> Html {
                             && x.path_id == comp_key.path_id
                             && x.area_id == comp_key.area_id
                             && x.comp_id == comp_key.comp_id
+                            && x.rating_update == comp_key.rating_update
                     });
                     match comp {
                         Some(c) => {
                             // TODO Duplicated logic right now
-                            if comp_key.interest == comps[c].interest {
+                            if comp_key.rating_update == comps[c].rating_update {
                                 comps.remove(c);
                             } else {
-                                comps[c].interest = comp_key.interest;
+                                comps[c].rating_update = comp_key.rating_update;
                             }
                             LocalStorage::set("competencies", comps).unwrap();
                         }

@@ -7,7 +7,7 @@ use yew::prelude::*;
 #[derive(Clone, Properties, PartialEq)]
 pub struct AreaListProps {
     pub sub_areas: Vec<Area>,
-    pub on_rating_changed: Callback<(i32, usize, usize)>, // (new rating, competencyId, areaId)
+    pub on_rating_changed: Callback<(RatingUpdate, usize, usize)>, // (new rating, competencyId, areaId)
 }
 
 #[function_component(AreaList)]
@@ -25,12 +25,13 @@ pub fn area_list(
             let on_rating_changed = on_rating_changed.clone();
             let area = area.clone();
             let on_area_rating_changed = {
-                Callback::from(move |pair: (i32, usize)| {
+                Callback::from(move |pair: (RatingUpdate, usize)| {
                     on_rating_changed.emit((pair.0, pair.1, area.id))
                 })
             };
 
             let interest: Vec<i32> = area.competencies.iter().map(|c| c.interest).collect();
+            let competency: Vec<i32> = area.competencies.iter().map(|c| c.competency).collect();
             let labels: Vec<String> = area
                 .competencies
                 .iter()
@@ -48,7 +49,11 @@ pub fn area_list(
                         />
                 </div>
                 <div>
-                    <Graph id={format!("graph-{}", area.name.to_lowercase())} interest={interest.clone()} labels={labels.clone()} />
+                    <Graph
+                        id={format!("graph-{}", area.name.to_lowercase())}
+                        interest={interest.clone()}
+                        competency={competency.clone()}
+                        labels={labels.clone()} />
                 </div>
              </div>
             }

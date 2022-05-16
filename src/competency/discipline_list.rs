@@ -5,7 +5,7 @@ use yew::prelude::*;
 #[derive(Clone, Properties, PartialEq)]
 pub struct DisciplineListProps {
     pub disciplines: Vec<Discipline>,
-    pub on_rating_changed: Callback<(i32, usize, usize, usize, usize)>, // (new rating, competencyId, areaId)
+    pub on_rating_changed: Callback<(RatingUpdate, usize, usize, usize, usize)>, // (new rating, competencyId, areaId)
 }
 
 #[function_component(DisciplineList)]
@@ -22,7 +22,7 @@ pub fn discipline_list(
             let disc = disc.clone();
             let on_rating_changed = on_rating_changed.clone();
             let on_disc_rating_changed = {
-                Callback::from(move |pair: (i32, usize, usize, usize)| {
+                Callback::from(move |pair: (RatingUpdate, usize, usize, usize)| {
                     on_rating_changed.emit((pair.0, pair.1, pair.2, pair.3, disc.id))
                 })
             };

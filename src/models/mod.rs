@@ -1,4 +1,4 @@
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 #[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct Discipline {
@@ -8,9 +8,15 @@ pub struct Discipline {
 }
 
 impl Discipline {
-    pub fn set_interest(&mut self, interest: i32, path_id: usize, area_id: usize, comp_id: usize) {
+    pub fn update_rating(
+        &mut self,
+        update: RatingUpdate,
+        path_id: usize,
+        area_id: usize,
+        comp_id: usize,
+    ) {
         let path = self.paths.iter_mut().find(|p| p.id == path_id).unwrap(); // TODO Handle Option
-        path.set_interest(interest, area_id, comp_id);
+        path.update_rating(update, area_id, comp_id);
     }
 }
 
@@ -21,10 +27,16 @@ pub struct Path {
     pub areas: Vec<Area>,
 }
 
+#[derive(Copy, Clone, PartialEq, Serialize, Deserialize, Debug)]
+pub enum RatingUpdate {
+    Interest(i32),
+    Competency(i32),
+}
+
 impl Path {
-    pub fn set_interest(&mut self, interest: i32, area_id: usize, comp_id: usize) {
+    pub fn update_rating(&mut self, update: RatingUpdate, area_id: usize, comp_id: usize) {
         let area = self.areas.iter_mut().find(|p| p.id == area_id).unwrap(); // TODO Handle Option
-        area.set_interest(interest, comp_id);
+        area.update_rating(update, comp_id);
     }
 }
 
@@ -36,13 +48,13 @@ pub struct Area {
 }
 
 impl Area {
-    pub fn set_interest(&mut self, interest: i32, comp_id: usize) {
+    pub fn update_rating(&mut self, update: RatingUpdate, comp_id: usize) {
         let comp = self
             .competencies
             .iter_mut()
             .find(|p| p.id == comp_id)
             .unwrap(); // TODO handle unwrap
-        comp.set_interest(interest);
+        comp.update_rating(update);
     }
 }
 
@@ -51,14 +63,27 @@ pub struct Competency {
     pub id: usize,
     pub name: String,
     pub interest: i32,
+    pub competency: i32,
 }
 
 impl Competency {
-    pub fn set_interest(&mut self, interest: i32) {
-        if self.interest == interest {
-            self.interest = 0;
-        } else {
-            self.interest = interest;
+    pub fn update_rating(&mut self, update: RatingUpdate) {
+        match update {
+            RatingUpdate::Interest(interest) => {
+                if self.interest == interest {
+                    self.interest = 0;
+                } else {
+                    self.interest = interest;
+                }
+            }
+
+            RatingUpdate::Competency(competency) => {
+                if self.competency == competency {
+                    self.competency = 0;
+                } else {
+                    self.competency = competency;
+                }
+            }
         }
     }
 }

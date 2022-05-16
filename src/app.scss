@@ -19,7 +19,7 @@ h1,h2,h3,h4 {
   margin-left: 1rem;
   border: 1px solid $lavender;
   display: grid;
-  width: 15rem;
+  width: 18rem;
 
   h4 {
     text-align: center;
@@ -46,8 +46,11 @@ h1,h2,h3,h4 {
 
 .rating {
   display: flex;
-  p:first-child { 
+  margin: 0 auto;
+
+  .rating-name { 
     margin-left: 0.5rem;
+    width: 6rem;
   }
 }
 

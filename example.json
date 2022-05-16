@@ -14,17 +14,20 @@
               {
                 "id": 1,
                 "name": "C#",
-                "interest": 0
+                "interest": 0,
+                "competency": 0
               },
               {
                 "id": 2,
                 "name": "Entity Framework",
-                "interest": 0
+                "interest": 0,
+                "competency": 0
               },
               {
                 "id": 3,
                 "name": "Dapper",
-                "interest": 0
+                "interest": 0,
+                "competency": 0
               }
             ]
           }
@@ -41,17 +44,20 @@
               {
                 "id": 1,
                 "name": "React",
-                "interest": 0
+                "interest": 0,
+                "competency": 0
               },
               {
                 "id": 2,
                 "name": "Angular",
-                "interest": 0
+                "interest": 0,
+                "competency": 0
               },
               {
                 "id": 3,
                 "name": "Cypress",
-                "interest": 0
+                "interest": 0,
+                "competency": 0
               }
             ]
           }

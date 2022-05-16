@@ -1,8 +1,6 @@
 use wasm_bindgen::prelude::*;
 use web_sys::HtmlElement;
 
-use crate::graph::Config;
-
 #[wasm_bindgen]
 extern "C" {
 

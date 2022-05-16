@@ -36,7 +36,7 @@ pub fn rating(
 
     html! {
         <div class="rating">
-            <p>{name}{":"}</p>
+            <p class="rating-name">{name}{":"}</p>
             <div class="rating-list">{range}</div>
         </div>
     }
