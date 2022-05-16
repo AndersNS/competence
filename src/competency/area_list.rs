@@ -7,7 +7,7 @@ use yew::prelude::*;
 #[derive(Clone, Properties, PartialEq)]
 pub struct AreaListProps {
     pub sub_areas: Vec<Area>,
-    pub on_rating_changed: Callback<(RatingUpdate, usize, usize)>, // (new rating, competencyId, areaId)
+    pub on_rating_changed: Callback<(Rating, usize, usize)>, // (new rating, competencyId, areaId)
 }
 
 #[function_component(AreaList)]
@@ -17,7 +17,6 @@ pub fn area_list(
         on_rating_changed,
     }: &AreaListProps,
 ) -> Html {
-    // TODO State ShowGraph
     let on_rating_changed = on_rating_changed.clone();
     sub_areas
         .iter()
@@ -25,7 +24,7 @@ pub fn area_list(
             let on_rating_changed = on_rating_changed.clone();
             let area = area.clone();
             let on_area_rating_changed = {
-                Callback::from(move |pair: (RatingUpdate, usize)| {
+                Callback::from(move |pair: (Rating, usize)| {
                     on_rating_changed.emit((pair.0, pair.1, area.id))
                 })
             };
