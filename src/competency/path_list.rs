@@ -5,7 +5,7 @@ use yew::prelude::*;
 #[derive(Clone, Properties, PartialEq)]
 pub struct PathListProps {
     pub paths: Vec<Path>,
-    pub on_rating_changed: Callback<(Rating, usize, usize, usize)>, // (new rating, competencyId, areaId)
+    pub on_rating_changed: Callback<CompetencyRating>, // (new rating, competencyId, areaId)
 }
 
 #[function_component(PathList)]
@@ -23,8 +23,9 @@ pub fn path_list(
             let path = path.clone();
             let on_rating_changed = on_rating_changed.clone();
             let on_path_rating_changed = {
-                Callback::from(move |pair: (Rating, usize, usize)| {
-                    on_rating_changed.emit((pair.0, pair.1, pair.2, path.id))
+                Callback::from(move |mut rating: CompetencyRating| {
+                    rating.path_id = path.id;
+                    on_rating_changed.emit(rating)
                 })
             };
             html! {

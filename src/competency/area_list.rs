@@ -7,7 +7,7 @@ use yew::prelude::*;
 #[derive(Clone, Properties, PartialEq)]
 pub struct AreaListProps {
     pub sub_areas: Vec<Area>,
-    pub on_rating_changed: Callback<(Rating, usize, usize)>, // (new rating, competencyId, areaId)
+    pub on_rating_changed: Callback<CompetencyRating>, // (new rating, competencyId, areaId)
 }
 
 #[function_component(AreaList)]
@@ -24,8 +24,9 @@ pub fn area_list(
             let on_rating_changed = on_rating_changed.clone();
             let area = area.clone();
             let on_area_rating_changed = {
-                Callback::from(move |pair: (Rating, usize)| {
-                    on_rating_changed.emit((pair.0, pair.1, area.id))
+                Callback::from(move |mut rating: CompetencyRating| {
+                    rating.area_id = area.id;
+                    on_rating_changed.emit(rating)
                 })
             };
 
