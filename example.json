@@ -44,31 +44,25 @@
               },
               {
                 "id": 6,
-                "name": "Entity Framework",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 7,
                 "name": "ASP.NET Core",
                 "interest": 0,
                 "competency": 0
               },
 
               {
-                "id": 8,
+                "id": 7,
                 "name": "Dependency Injection",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 9,
+                "id": 8,
                 "name": "Testing",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 10,
+                "id": 9,
                 "name": "MediatR",
                 "interest": 0,
                 "competency": 0
