@@ -1,3 +1,5 @@
+use std::borrow::BorrowMut;
+
 use crate::competency::discipline_list::*;
 use crate::models::*;
 use gloo_storage::{errors::StorageError, LocalStorage, Storage};
@@ -42,6 +44,26 @@ fn update_local_storage(comp_rating: CompetencyRating) {
     }
 }
 
+fn update_from_local_storage(fetched_discs: &mut Vec<Discipline>) {
+    let competencies: Result<Vec<CompetencyRating>, StorageError> =
+        LocalStorage::get("competencies");
+    match competencies {
+        Ok(comps) => {
+            for ele in comps {
+                if let Some(index) = fetched_discs.iter().position(|c| c.id == ele.discipline_id) {
+                    fetched_discs[index].update_rating(
+                        ele.rating,
+                        ele.path_id,
+                        ele.area_id,
+                        ele.comp_id,
+                    )
+                }
+            }
+        }
+        _ => {}
+    }
+}
+
 #[function_component(Competencies)]
 pub fn competencies() -> Html {
     let disciplines = use_state(|| vec![]);
@@ -60,25 +82,7 @@ pub fn competencies() -> Html {
                         .unwrap();
 
                     // Loop over stored values and update the state
-                    let competencies: Result<Vec<CompetencyRating>, StorageError> =
-                        LocalStorage::get("competencies");
-                    match competencies {
-                        Ok(comps) => {
-                            for ele in comps {
-                                if let Some(index) =
-                                    fetched_discs.iter().position(|c| c.id == ele.discipline_id)
-                                {
-                                    fetched_discs[index].update_rating(
-                                        ele.rating,
-                                        ele.path_id,
-                                        ele.area_id,
-                                        ele.comp_id,
-                                    )
-                                }
-                            }
-                        }
-                        _ => {}
-                    }
+                    update_from_local_storage(fetched_discs.borrow_mut());
 
                     discs.set(fetched_discs);
                 });
