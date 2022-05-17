@@ -28,6 +28,99 @@
                 "name": "Dapper",
                 "interest": 0,
                 "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "FluentValidation",
+                "interest": 0,
+                "competency": 0
+              },
+
+              {
+                "id": 5,
+                "name": "MassTransit",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
+                "name": "Entity Framework",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 7,
+                "name": "ASP.NET Core",
+                "interest": 0,
+                "competency": 0
+              },
+
+              {
+                "id": 8,
+                "name": "Dependency Injection",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 9,
+                "name": "Testing",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 10,
+                "name": "MediatR",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "name": "Arkitektur",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "MessageBrokers",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "Event Streaming",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Dapper",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Application architecture",
+                "interest": 0,
+                "competency": 0
+              },
+
+              {
+                "id": 5,
+                "name": "Microservices",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
+                "name": "Distributed Systems",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 7,
+                "name": "Domain Driven Design",
+                "interest": 0,
+                "competency": 0
               }
             ]
           }
@@ -43,19 +136,61 @@
             "competencies": [
               {
                 "id": 1,
-                "name": "React",
+                "name": "Mobile",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 2,
-                "name": "Angular",
+                "name": "React",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 3,
-                "name": "Cypress",
+                "name": "React Native",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Vue",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 5,
+                "name": "Angular",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
+                "name": "Svelte",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 7,
+                "name": "CSS",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 8,
+                "name": "Animations",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 9,
+                "name": "Designsystems",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 10,
+                "name": "WebAssembly",
                 "interest": 0,
                 "competency": 0
               }
