@@ -32,6 +32,8 @@ jobs:
       run: cargo fetch
     - name: Build
       run: trunk build --release
+    - name: Optimize wasm
+      run: 'npx wasm-opt -Os -o dist/competency-938275c2d389998c_bg.wasm dist/competency-938275c2d389998c_bg.wasm'
 
     - name: Deploy to Netlify
       uses: nwtgck/actions-netlify@v1.2
