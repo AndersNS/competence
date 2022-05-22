@@ -11,11 +11,17 @@ gloo-storage = "0.2.1"
 js-sys = "0.3.57"
 reqwasm = "0.5.0"
 serde = { version = "1.0.137", features = ["derive"] }
+serde_json = "1.0.67"
 wasm-bindgen = "0.2.80"
 wasm-bindgen-futures = "0.4.30"
 web-sys = "0.3.57"
 wee_alloc = "0.4.5"
 yew = "0.19.3"
+yew-router = "0.16.0"
+
+[dependencies.uuid]
+version = "1"
+features = ["v4", "js"]
 
 [profile.release]
 # less code to include into binary
