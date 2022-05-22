@@ -1,5 +1,5 @@
 use crate::models::*;
-use crate::{competency::discipline_list::*, routes::Route};
+use crate::{competency::discipline_list::*, competency::save_area::*, routes::Route};
 use gloo_console::log;
 use gloo_storage::{errors::StorageError, LocalStorage, Storage};
 use reqwasm::http::Request;
@@ -13,6 +13,7 @@ mod area_list;
 mod competency_list;
 mod discipline_list;
 mod path_list;
+mod save_area;
 
 fn update_local_storage(comp_rating: &CompetencyRating, id_suffix: &str) {
     let storage_id = storage_id(id_suffix);
@@ -24,7 +25,7 @@ fn update_local_storage(comp_rating: &CompetencyRating, id_suffix: &str) {
                     && x.path_id == comp_rating.path_id
                     && x.area_id == comp_rating.area_id
                     && x.comp_id == comp_rating.comp_id
-                    && x.rating == comp_rating.rating
+                    && x.rating.is_interest() == comp_rating.rating.is_interest()
             });
             match comp {
                 Some(c) => {
@@ -139,16 +140,22 @@ pub fn competencies() -> Html {
                                         let ratings: Vec<CompetencyRating> =
                                             result.json().await.unwrap();
 
+                                        let local_competencies =
+                                            get_competencies_from_localstorage(&val);
+
+                                        match local_competencies {
+                                            Ok(local_ratings) => {
+                                                if local_ratings.len() != ratings.len() {
+                                                    unsaved_changes.set(true);
+                                                }
+                                            }
+                                            _ => {}
+                                        }
                                         for rating in ratings.iter() {
                                             update_local_storage(rating.borrow(), &val.borrow());
                                         }
 
-                                        let updated = update_from_local_storage(
-                                            fetched_discs.borrow_mut(),
-                                            &val.borrow(),
-                                        );
-                                        let unsaved = updated - ratings.len();
-                                        unsaved_changes.set(unsaved != 0);
+                                        update_from_local_storage(fetched_discs.borrow_mut(), &val);
                                     }
                                 }
                                 _ => {}
@@ -240,7 +247,6 @@ pub fn competencies() -> Html {
                 match response {
                     Ok(res) => {
                         let text = res.text().await.unwrap();
-                        log!(format!("Got {} when posting competencies", text));
                         unsaved_changes.set(false);
                     }
                     _ => {}
@@ -252,8 +258,7 @@ pub fn competencies() -> Html {
 
     html! {
         <div class="discipline">
-            <p> {format!("Unsaved changes: {}", (*unsaved_changes).clone())} </p>
-            <button onclick={save.clone()} > {"Save"} </button>
+            <SaveArea on_save_clicked={save.clone()} unsaved_changes={(*unsaved_changes).clone()} />
             <DisciplineList
                 disciplines={(*disciplines).clone()}
                 on_rating_changed={on_disc_rating_changed.clone()}

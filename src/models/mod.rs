@@ -33,6 +33,19 @@ pub enum Rating {
     Competency(i32),
 }
 
+impl Rating {
+    pub fn is_interest(&self) -> bool {
+        match self {
+            Rating::Interest(_) => {
+                return true;
+            }
+            _ => {
+                return false;
+            }
+        }
+    }
+}
+
 impl Path {
     pub fn update_rating(&mut self, update: Rating, area_id: usize, comp_id: usize) {
         let area = self.areas.iter_mut().find(|p| p.id == area_id).unwrap();
@@ -70,19 +83,11 @@ impl Competency {
     pub fn update_rating(&mut self, update: Rating) {
         match update {
             Rating::Interest(interest) => {
-                if self.interest == interest {
-                    self.interest = 0;
-                } else {
-                    self.interest = interest;
-                }
+                self.interest = interest;
             }
 
             Rating::Competency(competency) => {
-                if self.competency == competency {
-                    self.competency = 0;
-                } else {
-                    self.competency = competency;
-                }
+                self.competency = competency;
             }
         }
     }

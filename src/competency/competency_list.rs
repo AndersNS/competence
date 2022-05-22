@@ -22,10 +22,27 @@ pub fn competency_list(
             let on_rating_changed = on_rating_changed.clone();
             let on_rating_changed1 = on_rating_changed.clone();
             let comp = comp.clone();
+
             let on_interest_changed =
-                { Callback::from(move |num: i32| on_rating_changed.emit(CompetencyRating::new(Rating::Interest(num), comp.id))) };
+                { 
+                Callback::from(move |num: i32| {
+                    if num == comp.interest {
+                        on_rating_changed.emit(CompetencyRating::new(Rating::Interest(0), comp.id))
+                    } else {
+                        on_rating_changed.emit(CompetencyRating::new(Rating::Interest(num), comp.id))
+                    }
+                })
+            };
             let on_competency_changed =
-                { Callback::from(move |num: i32| on_rating_changed1.emit(CompetencyRating::new(Rating::Competency(num), comp.id))) };
+                { 
+                Callback::from(move |num: i32| {
+                    if num == comp.competency {
+                        on_rating_changed1.emit(CompetencyRating::new(Rating::Competency(0), comp.id))
+                    } else {
+                        on_rating_changed1.emit(CompetencyRating::new(Rating::Competency(num), comp.id))
+                    }
+                })
+            };
             html! {
 
                 <div class="competency">
