@@ -1,6 +1,6 @@
 use crate::models::*;
 use crate::{competency::discipline_list::*, competency::save_area::*, routes::Route};
-use gloo_console::log;
+use gloo_console::{error, log};
 use gloo_storage::{errors::StorageError, LocalStorage, Storage};
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
@@ -246,8 +246,11 @@ pub fn competencies() -> Html {
 
                 match response {
                     Ok(res) => {
-                        let text = res.text().await.unwrap();
-                        unsaved_changes.set(false);
+                        if res.ok() {
+                            unsaved_changes.set(false);
+                        } else {
+                            error!("Saving failed!"); // TODO Better handling
+                        }
                     }
                     _ => {}
                 }
@@ -255,10 +258,14 @@ pub fn competencies() -> Html {
             });
         })
     };
-
+    let existing = (*tree_id).clone().is_none();
     html! {
         <div class="discipline">
-            <SaveArea on_save_clicked={save.clone()} unsaved_changes={(*unsaved_changes).clone()} />
+            <SaveArea
+                on_save_clicked={save.clone()}
+                unsaved_changes={(*unsaved_changes).clone()}
+                existing={!existing}
+            />
             <DisciplineList
                 disciplines={(*disciplines).clone()}
                 on_rating_changed={on_disc_rating_changed.clone()}
