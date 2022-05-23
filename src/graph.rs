@@ -89,7 +89,7 @@ pub fn graph(
 
     html! {
         <>
-            <div style="width:40rem">
+            <div style="width:50rem">
               <canvas ref={graph_ref} id={id.to_string()}></canvas>
             </div>
         </>
