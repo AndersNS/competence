@@ -1,6 +1,4 @@
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9ef5bffc-b084-4f52-be40-b409332664fb/deploy-status)](https://app.netlify.com/sites/variant-kompetanse/deploys)
-
-[Link to app](https://variant-kompetanse.netlify.com)
+[Link to app](https://variant-kompetanse.pages.dev/)
 
 # About 
 
