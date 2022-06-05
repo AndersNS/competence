@@ -1,4 +1,4 @@
-use crate::common::*;
+use crate::components::rating_select::*;
 use crate::models::*;
 use yew::prelude::*;
 
@@ -47,8 +47,8 @@ pub fn competency_list(
 
                 <div class="competency">
                     <h4>{format!("{}", comp.name)}</h4>
-                    <rating::Rating selected={comp.interest} on_click={on_interest_changed.clone()} name={"Interest"}/>
-                    <rating::Rating selected={comp.competency} on_click={on_competency_changed.clone()} name={"Competency"}/>
+                    <RatingSelect selected={comp.interest} on_click={on_interest_changed.clone()} name={"Interest"}/>
+                    <RatingSelect selected={comp.competency} on_click={on_competency_changed.clone()} name={"Competency"}/>
                 </div>
             }
         })

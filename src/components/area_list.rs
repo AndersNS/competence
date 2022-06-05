@@ -1,4 +1,4 @@
-use crate::competency::competency_list::*;
+use crate::components::competency_list::*;
 use crate::graph::*;
 use crate::models::*;
 use gloo_console::log;

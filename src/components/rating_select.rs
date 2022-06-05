@@ -1,19 +1,19 @@
 use yew::prelude::*;
 
 #[derive(Clone, Properties, PartialEq)]
-pub struct RatingProps {
+pub struct RatingSelectProps {
     pub selected: Option<i32>,
     pub on_click: Callback<i32>,
     pub name: String,
 }
 
-#[function_component(Rating)]
-pub fn rating(
-    RatingProps {
+#[function_component(RatingSelect)]
+pub fn rating_select(
+    RatingSelectProps {
         selected,
         on_click,
         name,
-    }: &RatingProps,
+    }: &RatingSelectProps,
 ) -> Html {
     let on_click = on_click.clone();
 

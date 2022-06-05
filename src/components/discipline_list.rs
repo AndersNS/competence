@@ -1,4 +1,4 @@
-use crate::competency::path_list::*;
+use crate::components::path_list::*;
 use crate::models::*;
 use yew::prelude::*;
 

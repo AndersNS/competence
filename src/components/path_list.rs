@@ -1,4 +1,4 @@
-use crate::competency::area_list::*;
+use crate::components::area_list::*;
 use crate::models::*;
 use yew::prelude::*;
 

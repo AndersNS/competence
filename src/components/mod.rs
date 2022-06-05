@@ -1,7 +1,7 @@
+use crate::local_storage::*;
 use crate::models::*;
-use crate::{competency::discipline_list::*, competency::save_area::*, routes::Route};
-use gloo_console::{error, log};
-use gloo_storage::{errors::StorageError, LocalStorage, Storage};
+use crate::{components::discipline_list::*, components::save_area::*, routes::Route};
+use gloo_console::error;
 use reqwasm::http::Request;
 use serde::{Deserialize, Serialize};
 use std::borrow::{Borrow, BorrowMut};
@@ -13,76 +13,8 @@ mod area_list;
 mod competency_list;
 mod discipline_list;
 mod path_list;
+mod rating_select;
 mod save_area;
-
-fn update_local_storage(comp_rating: &CompetencyRating, id_suffix: &str) {
-    let storage_id = storage_id(id_suffix);
-    let competencies = get_competencies_from_localstorage(id_suffix);
-    match competencies {
-        Ok(mut comps) => {
-            let comp = comps.iter_mut().position(|x| {
-                x.discipline_id == comp_rating.discipline_id
-                    && x.path_id == comp_rating.path_id
-                    && x.area_id == comp_rating.area_id
-                    && x.comp_id == comp_rating.comp_id
-                    && x.rating.is_interest() == comp_rating.rating.is_interest()
-            });
-            match comp {
-                Some(c) => {
-                    if comp_rating.rating == Rating::Interest(0)
-                        || comp_rating.rating == Rating::Competency(0)
-                    {
-                        comps.remove(c);
-                    } else {
-                        comps[c].rating = comp_rating.rating;
-                    }
-
-                    LocalStorage::set(storage_id, comps).unwrap();
-                }
-                _ => {
-                    comps.push(*comp_rating);
-                    LocalStorage::set(storage_id, comps).unwrap();
-                }
-            }
-        }
-        _ => {
-            LocalStorage::set(storage_id, vec![comp_rating]).unwrap();
-        }
-    }
-}
-
-fn update_discs_from_ratings(fetched_discs: &mut Vec<Discipline>, ratings: &Vec<CompetencyRating>) {
-    for ele in ratings.iter() {
-        if let Some(index) = fetched_discs.iter().position(|c| c.id == ele.discipline_id) {
-            fetched_discs[index].update_rating(ele.rating, ele.path_id, ele.area_id, ele.comp_id)
-        }
-    }
-}
-
-fn update_from_local_storage(fetched_discs: &mut Vec<Discipline>, id_suffix: &str) -> usize {
-    let competencies = get_competencies_from_localstorage(id_suffix);
-    match competencies {
-        Ok(ratings) => {
-            update_discs_from_ratings(fetched_discs, ratings.borrow());
-            return ratings.len();
-        }
-        _ => {
-            return 0;
-        }
-    }
-}
-
-fn storage_id(id_suffix: &str) -> String {
-    format!("competencies{}", id_suffix)
-}
-
-fn get_competencies_from_localstorage(
-    id_suffix: &str,
-) -> Result<Vec<CompetencyRating>, StorageError> {
-    let competencies: Result<Vec<CompetencyRating>, StorageError> =
-        LocalStorage::get(storage_id(id_suffix));
-    return competencies;
-}
 
 #[derive(Serialize, Deserialize, Clone)]
 struct TreeId {
@@ -127,11 +59,11 @@ pub fn competencies() -> Html {
                         .unwrap();
 
                     // Loop over stored values and update the state
-                    let todo = query_id.clone();
-                    match todo {
-                        Some(val) => {
+                    let id_opt = query_id.clone();
+                    match id_opt {
+                        Some(id) => {
                             let request =
-                                Request::get(&format!("{}/competency/{}", get_api_url(), val))
+                                Request::get(&format!("{}/competency/{}", get_api_url(), id))
                                     .send()
                                     .await;
                             match request {
@@ -141,7 +73,7 @@ pub fn competencies() -> Html {
                                             result.json().await.unwrap();
 
                                         let local_competencies =
-                                            get_competencies_from_localstorage(&val);
+                                            get_competencies_from_localstorage(&id);
 
                                         match local_competencies {
                                             Ok(local_ratings) => {
@@ -152,10 +84,10 @@ pub fn competencies() -> Html {
                                             _ => {}
                                         }
                                         for rating in ratings.iter() {
-                                            update_local_storage(rating.borrow(), &val.borrow());
+                                            update_local_storage(rating.borrow(), &id.borrow());
                                         }
 
-                                        update_from_local_storage(fetched_discs.borrow_mut(), &val);
+                                        update_from_local_storage(fetched_discs.borrow_mut(), &id);
                                     }
                                 }
                                 _ => {}
