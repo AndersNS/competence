@@ -39,16 +39,9 @@ pub fn competencies() -> Html {
         let discs = disciplines.clone();
         let tree_id = tree_id.clone();
         let unsaved_changes = unsaved_changes.clone();
+
         use_effect_with_deps(
             move |_| {
-                let discs = discs.clone();
-                let unsaved_changes = unsaved_changes.clone();
-
-                let query_id = match query {
-                    Ok(id) => Some(id.id),
-                    _ => None,
-                };
-
                 wasm_bindgen_futures::spawn_local(async move {
                     let mut fetched_discs: Vec<Discipline> = Request::get("/example.json")
                         .send()
@@ -59,13 +52,15 @@ pub fn competencies() -> Html {
                         .unwrap();
 
                     // Loop over stored values and update the state
-                    let id_opt = query_id.clone();
-                    match id_opt {
-                        Some(id) => {
-                            let request =
-                                Request::get(&format!("{}/competency/{}", get_api_url(), id))
-                                    .send()
-                                    .await;
+                    match query.borrow() {
+                        Ok(query_id) => {
+                            let request = Request::get(&format!(
+                                "{}/competency/{}",
+                                get_api_url(),
+                                query_id.id
+                            ))
+                            .send()
+                            .await;
                             match request {
                                 Ok(result) => {
                                     if result.status() == 200 {
@@ -73,7 +68,7 @@ pub fn competencies() -> Html {
                                             result.json().await.unwrap();
 
                                         let local_competencies =
-                                            get_competencies_from_localstorage(&id);
+                                            get_competencies_from_localstorage(&query_id.id);
 
                                         match local_competencies {
                                             Ok(local_ratings) => {
@@ -84,21 +79,28 @@ pub fn competencies() -> Html {
                                             _ => {}
                                         }
                                         for rating in ratings.iter() {
-                                            update_local_storage(rating.borrow(), &id.borrow());
+                                            update_local_storage(
+                                                rating.borrow(),
+                                                &query_id.id.borrow(),
+                                            );
                                         }
 
-                                        update_from_local_storage(fetched_discs.borrow_mut(), &id);
+                                        update_from_local_storage(
+                                            fetched_discs.borrow_mut(),
+                                            &query_id.id,
+                                        );
                                     }
                                 }
                                 _ => {}
                             }
+                            tree_id.set(Some(query_id.id.to_string()));
                         }
                         _ => {
                             update_from_local_storage(fetched_discs.borrow_mut(), "");
+                            tree_id.set(None);
                         }
                     }
 
-                    tree_id.set(query_id);
                     discs.set(fetched_discs);
                 });
                 || ()
@@ -111,6 +113,7 @@ pub fn competencies() -> Html {
         let disciplines = disciplines.clone();
         let unsaved_changes = unsaved_changes.clone();
         let tree_id = (*tree_id).clone();
+
         Callback::from(move |rating: CompetencyRating| {
             let mut discs = (*disciplines).clone();
             let tree_id = tree_id.clone();
@@ -144,6 +147,7 @@ pub fn competencies() -> Html {
         let history = history.clone();
         let unsaved_changes = unsaved_changes.clone();
         let current_id = (*tree_id).clone();
+
         Callback::from(move |_| {
             let history = history.clone();
             let unsaved_changes = unsaved_changes.clone();
