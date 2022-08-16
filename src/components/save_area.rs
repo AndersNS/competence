@@ -1,29 +1,80 @@
+use gloo_console::error;
+use reqwasm::http::Request;
+use uuid::Uuid;
 use yew::prelude::*;
+use yew_router::prelude::use_navigator;
+use yewdux::prelude::use_store;
+
+use crate::{
+    local_storage::{get_competencies_from_localstorage, update_local_storage},
+    models::TreeId,
+    routes::Route,
+    store::{get_api_url, State},
+};
 
 #[derive(Clone, Properties, PartialEq)]
-pub struct SaveAreaProps {
-    pub unsaved_changes: bool,
-    pub existing: bool,
-    pub on_save_clicked: Callback<bool>,
-}
+pub struct SaveAreaProps {}
 
 #[function_component(SaveArea)]
-pub fn save_area(
-    SaveAreaProps {
-        unsaved_changes,
-        on_save_clicked,
-        existing,
-    }: &SaveAreaProps,
-) -> Html {
-    let on_save_clicked = on_save_clicked.clone();
+pub fn save_area(SaveAreaProps {}: &SaveAreaProps) -> Html {
+    let (store, _dispatch) = use_store::<State>();
+    let navigator = use_navigator().unwrap();
+
+    let tree_id = store.tree_id.clone();
+
     let save_clicked = {
+        let tree_id = tree_id.clone();
+        let navigator = navigator.clone();
+
         Callback::from(move |e: MouseEvent| {
             e.prevent_default();
-            on_save_clicked.emit(true);
+            let tree_id = tree_id.clone();
+            let navigator = navigator.clone();
+
+            wasm_bindgen_futures::spawn_local(async move {
+                let id = match tree_id.clone() {
+                    Some(val) => val,
+                    None => Uuid::new_v4().as_simple().to_string(),
+                };
+
+                let curr = tree_id.unwrap_or(String::from(""));
+
+                let competencies = get_competencies_from_localstorage(&curr);
+
+                let body = match competencies {
+                    Ok(val) => {
+                        for rating in val.iter() {
+                            update_local_storage(&rating, &id);
+                        }
+
+                        serde_json::to_string(&val).unwrap()
+                    }
+                    _ => "[]".to_string(),
+                };
+
+                let request =
+                    Request::post(&format!("{}/competency/{}", get_api_url(), id)).body(body);
+
+                let response: Result<reqwasm::http::Response, reqwasm::Error> =
+                    request.send().await;
+
+                match response {
+                    Ok(res) => {
+                        if res.ok() {
+                            navigator
+                                .replace_with_query(&Route::Home, &TreeId { id: id.clone() })
+                                .unwrap();
+                        } else {
+                            error!("Saving failed!"); // TODO Better handling
+                        }
+                    }
+                    _ => {}
+                }
+            });
         })
     };
 
-    let unsaved = if *unsaved_changes {
+    let unsaved = if store.unsaved_items {
         html! {
             <p>{"You have unsaved changes!"}</p>
         }
@@ -33,7 +84,7 @@ pub fn save_area(
         }
     };
 
-    let save_text = if *existing {
+    let save_text = if store.tree_id.is_some() {
         "Save changes"
     } else {
         "Open persistent shareable URL"

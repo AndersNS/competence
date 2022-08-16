@@ -1,5 +1,10 @@
 use serde::{Deserialize, Serialize};
 
+#[derive(Serialize, Deserialize, Clone)]
+pub struct TreeId {
+    pub id: String,
+}
+
 #[derive(Clone, PartialEq, Deserialize, Debug)]
 pub struct Discipline {
     pub id: usize,

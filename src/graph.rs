@@ -1,4 +1,5 @@
 use crate::bindings;
+use gloo_console::log;
 use serde::{Deserialize, Serialize};
 use wasm_bindgen::JsValue;
 use web_sys::HtmlElement;
@@ -72,18 +73,21 @@ pub fn graph(
     let labels = labels.clone();
     let interest = interest.clone();
     let competency = competency.clone();
+
     let graph_ref = use_node_ref();
     {
         let interest1 = interest.clone();
         let labels1 = labels.clone();
         let competency1 = competency.clone();
+        let id = id.clone();
         let graph_ref = graph_ref.clone();
         use_effect_with_deps(
             move |_| {
+                log!("drawing graph");
                 draw_graph(interest1, competency1, labels1, &graph_ref);
                 || ()
             },
-            (labels, interest, competency),
+            (id, labels, interest, competency),
         );
     }
 

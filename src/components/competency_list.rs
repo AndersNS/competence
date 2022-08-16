@@ -5,7 +5,7 @@ use yew::prelude::*;
 #[derive(Clone, Properties, PartialEq)]
 pub struct CompetencyListProps {
     pub competencies: Vec<Competency>,
-    pub on_rating_changed: Callback<CompetencyRating>, // (new rating, competencyId)
+    pub on_rating_changed: Callback<CompetencyRating>,
 }
 
 #[function_component(CompetencyList)]
