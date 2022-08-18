@@ -1,5 +1,3 @@
-#![feature(derive_default_enum)]
-
 use routes::Route;
 use yew::prelude::*;
 use yew_router::prelude::*;

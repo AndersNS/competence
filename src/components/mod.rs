@@ -23,7 +23,6 @@ fn get_query_id(query: &HistoryResult<TreeId>) -> Option<String> {
 #[function_component(Competencies)]
 pub fn competencies() -> Html {
     let dispatch = Dispatch::<State>::new();
-
     let location = use_location().unwrap();
     let query: HistoryResult<TreeId> = location.query();
 
