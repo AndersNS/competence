@@ -12,7 +12,7 @@ use yewdux::prelude::*;
 // TODO Move this
 pub fn get_api_url() -> String {
     // "http://localhost:8787".to_string()
-    "https://variantcompetency.anders-slinde.workers.dev".to_string()
+    String::from("https://variantcompetency.anders-slinde.workers.dev")
 }
 
 #[derive(Clone, PartialEq, Default)]

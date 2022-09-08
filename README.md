@@ -1,4 +1,4 @@
-[Link to app](https://variant-kompetanse.pages.dev/)
+[Lenke til appen](https://variant-kompetanse.pages.dev/)
 
 # About 
 
@@ -9,6 +9,8 @@ Applikasjonen er en rust webassembly-applikasjon, grafen er laget med chartjs.
 Akkurat nå så lagres kompetansene man velger i localstorage, og lisen over kompetansene er i en [json fil](./example.json).
 
 # Running
+
+You need rust installed first. This [getting started guid](https://www.rust-lang.org/learn/get-started) will help you get rust going. 
 
 Install trunk 
 ```bash
