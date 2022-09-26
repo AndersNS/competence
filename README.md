@@ -6,7 +6,7 @@ Applikasjonen her er et forsøk på å digitalisere en kompetansekartlegging vi 
 
 Applikasjonen er en rust webassembly-applikasjon, grafen er laget med chartjs. 
 
-Akkurat nå så lagres kompetansene man velger i localstorage, man kan velge å lagre det til KV i CloudFlare via en CF Worker.
+Akkurat nå så lagres kompetansene man velger i localstorage, man kan velge å lagre det til [KV i CloudFlare via en CF Worker](https://github.com/AndersNS/competence-worker).
 
 Listen over kompetanser er i en [json fil](./example.json).
 
