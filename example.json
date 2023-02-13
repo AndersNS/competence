@@ -9,7 +9,7 @@
         "areas": [
           {
             "id": 1,
-            "name": ".NET",
+            "name": "Språk",
             "competencies": [
               {
                 "id": 1,
@@ -19,55 +19,37 @@
               },
               {
                 "id": 2,
-                "name": "Entity Framework",
+                "name": "Java",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 3,
-                "name": "Dapper",
+                "name": "Python",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 4,
-                "name": "Continuous integration & delivery i .NET",
+                "name": "F#",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 5,
-                "name": "MassTransit",
+                "name": "Javascript/Node.js",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 6,
-                "name": "ASP.NET Core",
+                "name": "Rust",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 7,
-                "name": "Dependency Injection",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 8,
-                "name": "Testing",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 9,
-                "name": "MediatR",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 10,
-                "name": "Logging",
+                "name": "Go",
                 "interest": 0,
                 "competency": 0
               }
@@ -75,59 +57,35 @@
           },
           {
             "id": 2,
-            "name": "Arkitektur",
+            "name": "Databases",
             "competencies": [
               {
                 "id": 1,
-                "name": "MessageBrokers",
+                "name": "SQL",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 2,
-                "name": "Event Streaming",
+                "name": "Relational",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 3,
-                "name": "Sikkerhet - Zero Trust, Least Privilege, OWASP",
+                "name": "NoSQL",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 4,
-                "name": "Gang of Four Design Patterns",
+                "name": "Search",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 5,
-                "name": "Microservices",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 8,
-                "name": "Monoliths",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 10,
-                "name": "Serverless",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 6,
-                "name": "Distributed Systems",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 7,
-                "name": "Domain Driven Design",
+                "name": "ORMs",
                 "interest": 0,
                 "competency": 0
               }
@@ -151,49 +109,385 @@
               },
               {
                 "id": 2,
-                "name": "Web (HTML, CSS, JS-vanilla)",
+                "name": "Styling",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 3,
-                "name": "Desktop applications",
+                "name": "Designsystem",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 4,
-                "name": "Animations",
+                "name": "Rammeverk",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 5,
-                "name": "Designsystems",
+                "name": "State",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 6,
-                "name": "Build tools & Bundlers",
+                "name": "Testrammeverk",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 7,
-                "name": "Progressive Web App",
+                "name": "Javascript",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 8,
-                "name": "Server Side Rendering (SSR)",
+                "name": "Web components",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 9,
                 "name": "WebAssembly",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 10,
+                "name": "Bundlers",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "name": "Softskills / Metodologi",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "Agile",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "Scrum",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Kanban",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Teamledelse",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 5,
+                "name": "Mentoring",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "name": "Arkitektur",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "Microservices",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "Event Streaming",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Message Brokers",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "API Gateway",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 5,
+                "name": "SOLID",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
+                "name": "Dependency Injection",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 7,
+                "name": "GoF Design Paterns",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 8,
+                "name": "Serverless",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 9,
+                "name": "Domain Driven Design",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 10,
+                "name": "Data Mesh",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "name": "Sikkerhet / Personvern",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "GDPR",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "OAuth / Open ID Connect (OICD)",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Kryptering / Signering",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "OWASP",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "name": "Cloud",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "Azure",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "AWS",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "GCP",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Firebase",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 5,
+                "name": "Vercel",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
+                "name": "Netlify",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 7,
+                "name": "Cloudflare",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "name": "Devops",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "CI/CD",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "Logging",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Metrics",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Tracing",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 5,
+                "name": "Infrastructure as Code",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
+                "name": "Containers",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "name": "Testing",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "End to end testing (E2E)",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "Unit Testing",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Behaviour Driven Development (BDD)",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Test Driven Development (TDD)",
+                "interest": 0,
+                "competency": 0
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "name": "Verktøy",
+        "areas": [
+          {
+            "id": 1,
+            "name": "General",
+            "competencies": [
+              {
+                "id": 1,
+                "name": "Git",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 2,
+                "name": "Figma",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 3,
+                "name": "Jira",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 4,
+                "name": "Miro",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 5,
+                "name": "Trello",
                 "interest": 0,
                 "competency": 0
               }
