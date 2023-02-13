@@ -6,6 +6,7 @@ use yew::prelude::*;
 
 #[derive(Clone, Properties, PartialEq)]
 pub struct AreaListProps {
+    pub path_id: usize,
     pub sub_areas: Vec<Area>,
     pub on_rating_changed: Callback<CompetencyRating>, // (new rating, competencyId, areaId)
 }
@@ -13,6 +14,7 @@ pub struct AreaListProps {
 #[function_component(AreaList)]
 pub fn area_list(
     AreaListProps {
+        path_id,
         sub_areas,
         on_rating_changed,
     }: &AreaListProps,
@@ -50,7 +52,7 @@ pub fn area_list(
                 </div>
                 <div>
                     <Graph
-                        id={format!("graph-{}", area.name.to_lowercase())}
+                        id={format!("graph-{}-{}", area.name.to_lowercase(), path_id)}
                         interest={interest.clone()}
                         competency={competency.clone()}
                         labels={labels.clone()} />

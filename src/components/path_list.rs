@@ -32,6 +32,7 @@ pub fn path_list(
             <div class="path">
                 <h2>{format!("{}", path.name)}</h2>
                 <AreaList
+                    path_id={path.id}
                     sub_areas={path.areas.clone()}
                     on_rating_changed={on_path_rating_changed.clone()}
                     />
