@@ -37,7 +37,7 @@
               },
               {
                 "id": 5,
-                "name": "Javascript/Node.js",
+                "name": "JavaScript/TypeScript",
                 "interest": 0,
                 "competency": 0
               },
@@ -57,7 +57,7 @@
           },
           {
             "id": 2,
-            "name": "Databases",
+            "name": "Databaser",
             "competencies": [
               {
                 "id": 1,
@@ -73,18 +73,24 @@
               },
               {
                 "id": 3,
-                "name": "NoSQL",
+                "name": "Document",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 4,
-                "name": "Search",
+                "name": "Graph",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 5,
+                "name": "Search",
+                "interest": 0,
+                "competency": 0
+              },
+              {
+                "id": 6,
                 "name": "ORMs",
                 "interest": 0,
                 "competency": 0
@@ -139,24 +145,18 @@
               },
               {
                 "id": 7,
-                "name": "Javascript",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 8,
                 "name": "Web components",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 9,
+                "id": 8,
                 "name": "WebAssembly",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 10,
+                "id": 9,
                 "name": "Bundlers",
                 "interest": 0,
                 "competency": 0
@@ -223,54 +223,42 @@
               },
               {
                 "id": 2,
-                "name": "Event Streaming",
+                "name": "Distribuerte systemer",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 3,
-                "name": "Message Brokers",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 4,
                 "name": "API Gateway",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 5,
-                "name": "SOLID",
-                "interest": 0,
-                "competency": 0
-              },
-              {
-                "id": 6,
+                "id": 4,
                 "name": "Dependency Injection",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 7,
-                "name": "GoF Design Paterns",
+                "id": 5,
+                "name": "Design patterns",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 8,
+                "id": 6,
                 "name": "Serverless",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 9,
+                "id": 7,
                 "name": "Domain Driven Design",
                 "interest": 0,
                 "competency": 0
               },
               {
-                "id": 10,
+                "id": 8,
                 "name": "Data Mesh",
                 "interest": 0,
                 "competency": 0
@@ -307,7 +295,7 @@
               },
               {
                 "id": 4,
-                "name": "OWASP",
+                "name": "Applikasjonsikkerhet (OWASP TOP 10)",
                 "interest": 0,
                 "competency": 0
               }
@@ -331,13 +319,13 @@
               },
               {
                 "id": 2,
-                "name": "AWS",
+                "name": "Amazon Web Services (AWS)",
                 "interest": 0,
                 "competency": 0
               },
               {
                 "id": 3,
-                "name": "GCP",
+                "name": "Google Cloud",
                 "interest": 0,
                 "competency": 0
               },
@@ -379,7 +367,7 @@
             "competencies": [
               {
                 "id": 1,
-                "name": "CI/CD",
+                "name": "Continuous Integration & Deployment",
                 "interest": 0,
                 "competency": 0
               },
