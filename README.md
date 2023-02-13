@@ -31,3 +31,10 @@ Compile and host
 ```
 trunk serve --open
 ```
+
+# Todo
+
+- [ ] CSV-export
+- [ ] Håndtere at treet har endret seg på en bedre måte (bare discarde det som ligger i localstorage kanskje?)
+- [ ] Bedre måte å navigere mellom områdene på (annet enn å scrolle)
+
