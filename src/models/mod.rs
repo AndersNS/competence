@@ -19,9 +19,13 @@ impl Discipline {
         path_id: usize,
         area_id: usize,
         comp_id: usize,
-    ) {
-        let path = self.paths.iter_mut().find(|p| p.id == path_id).unwrap();
-        path.update_rating(update, area_id, comp_id);
+    ) -> Result<(), String> {
+        let path = self
+            .paths
+            .iter_mut()
+            .find(|p| p.id == path_id)
+            .ok_or("Could not find path".to_string())?;
+        return path.update_rating(update, area_id, comp_id);
     }
 }
 
@@ -52,9 +56,18 @@ impl Rating {
 }
 
 impl Path {
-    pub fn update_rating(&mut self, update: Rating, area_id: usize, comp_id: usize) {
-        let area = self.areas.iter_mut().find(|p| p.id == area_id).unwrap();
-        area.update_rating(update, comp_id);
+    pub fn update_rating(
+        &mut self,
+        update: Rating,
+        area_id: usize,
+        comp_id: usize,
+    ) -> Result<(), String> {
+        let area = self
+            .areas
+            .iter_mut()
+            .find(|p| p.id == area_id)
+            .ok_or("Could not find area".to_string())?;
+        return area.update_rating(update, comp_id);
     }
 }
 
@@ -66,13 +79,13 @@ pub struct Area {
 }
 
 impl Area {
-    pub fn update_rating(&mut self, update: Rating, comp_id: usize) {
+    pub fn update_rating(&mut self, update: Rating, comp_id: usize) -> Result<(), String> {
         let comp = self
             .competencies
             .iter_mut()
             .find(|p| p.id == comp_id)
-            .unwrap();
-        comp.update_rating(update);
+            .ok_or("Could not find competency".to_string())?;
+        return comp.update_rating(update);
     }
 }
 
@@ -85,14 +98,16 @@ pub struct Competency {
 }
 
 impl Competency {
-    pub fn update_rating(&mut self, update: Rating) {
+    pub fn update_rating(&mut self, update: Rating) -> Result<(), String> {
         match update {
             Rating::Interest(interest) => {
                 self.interest = interest;
+                Ok(())
             }
 
             Rating::Competency(competency) => {
                 self.competency = competency;
+                Ok(())
             }
         }
     }

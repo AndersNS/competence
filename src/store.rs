@@ -47,7 +47,7 @@ impl State {
             rating.path_id,
             rating.area_id,
             rating.comp_id,
-        );
+        ).unwrap();
 
         match &self.tree_id {
             Some(tree_id) => {

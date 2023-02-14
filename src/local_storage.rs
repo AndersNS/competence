@@ -43,19 +43,32 @@ pub fn update_local_storage(comp_rating: &CompetencyRating, id_suffix: &str) {
 pub fn update_discs_from_ratings(
     fetched_discs: &mut Vec<Discipline>,
     ratings: &Vec<CompetencyRating>,
-) {
+) -> Result<(), String> {
     for ele in ratings.iter() {
         if let Some(index) = fetched_discs.iter().position(|c| c.id == ele.discipline_id) {
-            fetched_discs[index].update_rating(ele.rating, ele.path_id, ele.area_id, ele.comp_id)
+            let update_result = fetched_discs[index].update_rating(
+                ele.rating,
+                ele.path_id,
+                ele.area_id,
+                ele.comp_id,
+            );
+            if update_result.is_err() {
+                return update_result;
+            }
         }
     }
+    Ok(())
 }
 
 pub fn update_from_local_storage(fetched_discs: &mut Vec<Discipline>, id_suffix: &str) -> usize {
     let competencies = get_competencies_from_localstorage(id_suffix);
     match competencies {
         Ok(ratings) => {
-            update_discs_from_ratings(fetched_discs, ratings.borrow());
+            let update_result = update_discs_from_ratings(fetched_discs, ratings.borrow());
+            if update_result.is_err() {
+                let storage_id = storage_id(id_suffix);
+                LocalStorage::delete(storage_id);
+            }
             return ratings.len();
         }
         _ => {
