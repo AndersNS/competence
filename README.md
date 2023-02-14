@@ -36,5 +36,5 @@ trunk serve --open
 
 - [ ] CSV-export
 - [ ] Håndtere at treet har endret seg på en bedre måte (bare discarde det som ligger i localstorage kanskje?)
-- [ ] Bedre måte å navigere mellom områdene på (annet enn å scrolle)
-
+- [ ] Bedre måte å navigere mellom "områdene" på (annet enn å scrolle)
+- [ ] UI for å lage custom urls
