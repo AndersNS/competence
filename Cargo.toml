@@ -13,7 +13,7 @@ serde = { version = "1.0.137", features = ["derive"] }
 serde_json = "1.0.67"
 wasm-bindgen = "0.2.80"
 wasm-bindgen-futures = "0.4.30"
-web-sys = "0.3.59"
+web-sys = { version = "0.3.61", features = ["Navigator", "Window", "Clipboard"] }
 wee_alloc = "0.4.5"
 yew = { git = "https://github.com/yewstack/yew.git", features = ["csr"] }
 yew-router = { git = "https://github.com/yewstack/yew.git" }

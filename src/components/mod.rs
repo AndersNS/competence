@@ -8,7 +8,6 @@ use yewdux::prelude::Dispatch;
 
 mod area_list;
 mod competency_list;
-mod csv;
 mod discipline_list;
 mod path_list;
 mod rating_select;

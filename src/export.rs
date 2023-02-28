@@ -1,11 +1,11 @@
 use crate::models::Discipline;
 
-fn export_tree(disc: Discipline) -> String {
+pub fn export_tree(disc: &Discipline) -> String {
     let mut csv = "Discipline;Path;Area;Competency;Interest;Competency".to_string();
 
-    for path in disc.paths {
-        for area in path.areas {
-            for comp in area.competencies {
+    for path in &disc.paths {
+        for area in &path.areas {
+            for comp in &area.competencies {
                 csv.push_str(
                     format!(
                         "\n{};{};{};{};{};{}",
@@ -81,9 +81,8 @@ mod test {
         };
 
         //act
-        let csv_string = export_tree(disc);
+        let csv_string = export_tree(&disc);
 
-        ///assert
         assert_eq!(
             csv_string,
             "Discipline;Path;Area;Competency;Interest;Competency
@@ -117,9 +116,8 @@ Utvikling;Frontend;Rammeverk;React.JS;3;2"
         };
 
         //act
-        let csv_string = export_tree(disc);
+        let csv_string = export_tree(&disc);
 
-        ///assert
         assert_eq!(
             csv_string,
             "Discipline;Path;Area;Competency;Interest;Competency
@@ -144,9 +142,8 @@ Utvikling;Backend;Språk;C#;5;3"
         };
 
         //act
-        let csv_string = export_tree(disc);
+        let csv_string = export_tree(&disc);
 
-        ///assert
         assert_eq!(
             csv_string,
             "Discipline;Path;Area;Competency;Interest;Competency"
