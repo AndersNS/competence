@@ -35,8 +35,9 @@ trunk serve --open
 # Todo (uprioritert)
 
 - [ ] CSV-export
-- [ ] Håndtere at treet har endret seg på en bedre måte (bare discarde det som ligger i localstorage kanskje?)
+- [x] Håndtere at treet har endret seg på en bedre måte (bare discarde det som ligger i localstorage kanskje?)
 - [ ] Bedre måte å navigere mellom "områdene" på (annet enn å scrolle)
 - [ ] UI for å lage custom urls
 - [ ] En mer egnet måte å lagre data på (enn keyvault)
 - [ ] Visning for detaljinformasjon for hver kompetanse
+- [ ] Server rendering

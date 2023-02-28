@@ -8,6 +8,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 pub mod bindings;
 mod components;
+pub mod export;
 pub mod graph;
 pub mod local_storage;
 pub mod models;
@@ -18,6 +19,7 @@ fn switch(routes: Route) -> Html {
     match routes {
         Route::Home => html! { <components::Competencies /> },
         Route::NotFound => html! { <h1>{ "404" }</h1> },
+        Route::Csv => html! { <components::Csv /> },
     }
 }
 
