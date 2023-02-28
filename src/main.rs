@@ -1,3 +1,4 @@
+use components::{Competencies};
 use routes::Route;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -8,6 +9,7 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 pub mod bindings;
 mod components;
+pub mod export;
 pub mod graph;
 pub mod local_storage;
 pub mod models;
@@ -16,7 +18,7 @@ pub mod store;
 
 fn switch(routes: Route) -> Html {
     match routes {
-        Route::Home => html! { <components::Competencies /> },
+        Route::Home => html! { <Competencies /> },
         Route::NotFound => html! { <h1>{ "404" }</h1> },
     }
 }

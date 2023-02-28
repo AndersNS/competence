@@ -13,6 +13,15 @@ h1,h2,h3,h4 {
   margin: 0;
 }
 
+.d-flex {
+  display: flex;
+}
+
+.csv-button {
+  margin-top: auto;
+  margin-left: 1rem;
+  color: $mauve;
+}
 
 .competency {
   margin-bottom: 0.5rem;

@@ -1,4 +1,5 @@
 use crate::components::path_list::*;
+use crate::export::export_tree;
 use crate::models::*;
 use crate::store::State;
 use yew::prelude::*;
@@ -29,9 +30,27 @@ pub fn discipline_list(DisciplineListProps {}: &DisciplineListProps) -> Html {
                     on_rating_changed.emit(rating)
                 })
             };
+
+            let copy_as_csv_clicked = {
+                let disc = disc.clone();
+                Callback::from(move |e: MouseEvent| {
+                    e.prevent_default();
+                    let disc = disc.clone();
+                    yew::platform::spawn_local(async move {
+                        let csv_string = export_tree(&disc);
+                        let window = web_sys::window().unwrap();
+                        let promis = window.navigator().clipboard().unwrap().write_text(&csv_string);
+                        let _result = wasm_bindgen_futures::JsFuture::from(promis).await.unwrap();
+                    });
+                })
+            };
+
             html! {
             <>
-                <h1>{disc.name}</h1>
+                <div class="d-flex">
+                    <h1>{disc.name}</h1>
+                    <a class="csv-button" href="#" onclick={copy_as_csv_clicked.clone()}>{"Copy as csv"}</a>
+                </div>
                 <PathList
                     paths={disc.paths.clone()}
                     on_rating_changed={on_disc_rating_changed.clone()}
