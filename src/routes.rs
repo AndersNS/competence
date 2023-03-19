@@ -5,6 +5,9 @@ pub enum Route {
     #[at("/")]
     Home,
 
+    #[at("/discipline/:id")]
+    Discipline { id: usize },
+
     #[not_found]
     #[at("/404")]
     NotFound,

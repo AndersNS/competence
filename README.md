@@ -36,7 +36,7 @@ trunk serve --open
 
 - [x] CSV-export
 - [x] Håndtere at treet har endret seg på en bedre måte (bare discarde det som ligger i localstorage kanskje?)
-- [ ] Bedre måte å navigere mellom "områdene" på (annet enn å scrolle)
+- [x] Bedre måte å navigere mellom "områdene" på (annet enn å scrolle)
 - [ ] UI for å lage custom urls
 - [ ] En mer egnet måte å lagre data på (enn key-value i cloudflare)
 - [ ] Visning for detaljinformasjon for hver kompetanse

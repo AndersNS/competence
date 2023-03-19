@@ -1,106 +1,117 @@
 @import 'colors';
 
 html {
-  font-size: 16px;
+    font-size: 16px;
 }
 
 body {
-  background-color: $black2;
-  color: $rosewater;
+    background-color: $black2;
+    color: $rosewater;
 }
 
-h1,h2,h3,h4 {
-  margin: 0;
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
 }
 
 .d-flex {
-  display: flex;
+    display: flex;
 }
 
-.csv-button {
-  margin-top: auto;
-  margin-left: 1rem;
-  color: $mauve;
-}
-
-.competency {
-  margin-bottom: 0.5rem;
-  margin-left: 1rem;
-  border: 1px solid $lavender;
-  display: grid;
-  width: 18rem;
-
-  h4 {
-    text-align: center;
-    margin: 0.5rem 0 0 0;
+.menu {
+  a {
+    color: $lavender;
+  }
+  a:hover {
     color: $red;
   }
 }
 
+.csv-button {
+    margin-top: auto;
+    margin-left: 1rem;
+    color: $mauve;
+}
+
+.competency {
+    margin-bottom: 0.5rem;
+    margin-left: 1rem;
+    border: 1px solid $lavender;
+    display: grid;
+    width: 18rem;
+
+    h4 {
+        text-align: center;
+        margin: 0.5rem 0 0 0;
+        color: $red;
+    }
+}
+
 .path {
-  margin-left: 1.5rem;
+    margin-left: 1.5rem;
 }
 
 .area {
-  display: flex;
-  margin-left: 1.5rem;
-  padding: 0.5rem;
+    display: flex;
+    margin-left: 1.5rem;
+    padding: 0.5rem;
 }
 
 .discipline {
-  padding: 0.5rem;
-  margin-left: 1.5rem;
-  max-width: 40rem;
+    padding: 0.5rem;
+    margin-left: 1.5rem;
+    max-width: 40rem;
 }
 
 .rating {
-  display: flex;
-  margin: 0 auto;
+    display: flex;
+    margin: 0 auto;
 
-  .rating-name { 
-    margin-left: 0.5rem;
-    width: 6rem;
-  }
+    .rating-name {
+        margin-left: 0.5rem;
+        width: 6rem;
+    }
 }
 
 .rating-list {
-  display: flex;
-  justify-content: space-between; 
+    display: flex;
+    justify-content: space-between;
 
+    p {
+        text-align: center;
+        width: 1rem;
+        margin-right: 0.25rem;
+        margin-left: 0.25rem;
+        font-weight: bold;
+        border: 3px solid rgba($white, 0.4);
+    }
 
-  p {
-    text-align:center;
-    width: 1rem;
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
-    font-weight:bold;
-    border: 3px solid rgba($white, 0.4);
-  }
+    p:hover {
+        cursor: pointer;
+        color: $mauve;
+        border: 3px solid $mauve;
+    }
 
-  p:hover {
-    cursor: pointer;
-    color: $mauve;
-    border: 3px solid $mauve;
-  }
-
-  .selected {
-    color: $green;
-    border: 3px solid $green;
-  }
+    .selected {
+        color: $green;
+        border: 3px solid $green;
+    }
 }
 
 .save-area {
-  display: flex;
-  margin-bottom: 1rem;
+    display: flex;
+    margin-bottom: 1rem;
 
-  p {
-    margin-right: 2rem;
-  }
+    p {
+        margin-right: 2rem;
+    }
 
-  a {
-    color: $peach;
-  }
-  a:hover {
-    color: $lavender;
-  }
+    a {
+        color: $peach;
+    }
+    a:hover {
+        color: $lavender;
+    }
 }

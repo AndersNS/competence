@@ -1,4 +1,4 @@
-use components::{Competencies};
+use components::{competencies::Competencies, home::Home};
 use routes::Route;
 use yew::prelude::*;
 use yew_router::prelude::*;
@@ -18,7 +18,8 @@ pub mod store;
 
 fn switch(routes: Route) -> Html {
     match routes {
-        Route::Home => html! { <Competencies /> },
+        Route::Home => html! { <Home /> },
+        Route::Discipline { id } => html! { <Competencies {id} /> },
         Route::NotFound => html! { <h1>{ "404" }</h1> },
     }
 }

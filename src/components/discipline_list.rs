@@ -6,10 +6,12 @@ use yew::prelude::*;
 use yewdux::prelude::use_store;
 
 #[derive(Clone, Properties, PartialEq)]
-pub struct DisciplineListProps {}
+pub struct DisciplineListProps {
+    pub id: usize
+}
 
 #[function_component(DisciplineList)]
-pub fn discipline_list(DisciplineListProps {}: &DisciplineListProps) -> Html {
+pub fn discipline_list(DisciplineListProps { id }: &DisciplineListProps) -> Html {
     let (store, dispatch) = use_store::<State>();
 
     let on_disc_rating_changed = {
@@ -21,7 +23,14 @@ pub fn discipline_list(DisciplineListProps {}: &DisciplineListProps) -> Html {
     store
         .disciplines
         .iter()
-        .map(|disc| {
+        .find(|discipline| discipline.id == *id)
+        .map_or_else(|| html! {
+            <>
+                <div class="d-flex">
+                    <h1>{ "Not found" }</h1>
+                </div>
+            </>
+            }, |disc| {
             let disc = disc.clone();
             let on_rating_changed = on_disc_rating_changed.clone();
             let on_disc_rating_changed = {
@@ -58,5 +67,4 @@ pub fn discipline_list(DisciplineListProps {}: &DisciplineListProps) -> Html {
             </>
             }
         })
-        .collect()
 }
