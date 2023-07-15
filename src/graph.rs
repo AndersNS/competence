@@ -1,7 +1,6 @@
 use crate::bindings;
 use gloo_console::log;
 use serde::{Deserialize, Serialize};
-use wasm_bindgen::JsValue;
 use web_sys::HtmlElement;
 use yew::prelude::*;
 
@@ -57,7 +56,7 @@ fn draw_graph(interest: Vec<i32>, competency: Vec<i32>, labels: Vec<String>, gra
     ];
     let data = Data { labels, datasets };
 
-    let js_value = JsValue::from_serde(&data).unwrap();
+    let js_value = serde_wasm_bindgen::to_value(&data).unwrap();
     bindings::renderChart(graph_ref.cast::<HtmlElement>().unwrap(), js_value);
 }
 
