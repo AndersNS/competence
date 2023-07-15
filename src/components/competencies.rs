@@ -28,8 +28,9 @@ pub fn competencies(CompetenciesProps { id }: &CompetenciesProps) -> Html {
 
     html! {
         <div class="discipline">
-            <SaveArea discipline={id.clone()} />
-            <DisciplineList id={id.clone()} />
+            <SaveArea discipline={*id} />
+            <DisciplineList id={*id} />
         </div>
     }
 }
+

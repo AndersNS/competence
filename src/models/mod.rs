@@ -25,7 +25,7 @@ impl Discipline {
             .iter_mut()
             .find(|p| p.id == path_id)
             .ok_or("Could not find path".to_string())?;
-        return path.update_rating(update, area_id, comp_id);
+        path.update_rating(update, area_id, comp_id)
     }
 }
 
@@ -44,14 +44,7 @@ pub enum Rating {
 
 impl Rating {
     pub fn is_interest(&self) -> bool {
-        match self {
-            Rating::Interest(_) => {
-                return true;
-            }
-            _ => {
-                return false;
-            }
-        }
+        matches!(self, Rating::Interest(_))
     }
 }
 
@@ -67,7 +60,7 @@ impl Path {
             .iter_mut()
             .find(|p| p.id == area_id)
             .ok_or("Could not find area".to_string())?;
-        return area.update_rating(update, comp_id);
+        area.update_rating(update, comp_id)
     }
 }
 
@@ -85,7 +78,7 @@ impl Area {
             .iter_mut()
             .find(|p| p.id == comp_id)
             .ok_or("Could not find competency".to_string())?;
-        return comp.update_rating(update);
+        comp.update_rating(update)
     }
 }
 

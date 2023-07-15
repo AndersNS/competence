@@ -17,7 +17,7 @@ pub fn export_tree(disc: &Discipline) -> String {
         }
     }
 
-    return csv;
+    csv
 }
 
 #[cfg(test)]

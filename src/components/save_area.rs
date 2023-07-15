@@ -14,7 +14,7 @@ use crate::{
 
 #[derive(Clone, Properties, PartialEq)]
 pub struct SaveAreaProps {
-    pub discipline: usize
+    pub discipline: usize,
 }
 
 #[function_component(SaveArea)]
@@ -23,18 +23,16 @@ pub fn save_area(SaveAreaProps { discipline }: &SaveAreaProps) -> Html {
     let navigator = use_navigator().unwrap();
 
     let tree_id = store.tree_id.clone();
-    let discipline_id = discipline.clone();
+    let discipline_id = *discipline;
 
     let save_clicked = {
-        let tree_id = tree_id.clone();
-        let navigator = navigator.clone();
-        let discipline_id = discipline_id.clone();
+        let tree_id = tree_id;
+        let navigator = navigator;
 
         Callback::from(move |e: MouseEvent| {
             e.prevent_default();
             let tree_id = tree_id.clone();
             let navigator = navigator.clone();
-            let discipline_id = discipline_id.clone();
 
             wasm_bindgen_futures::spawn_local(async move {
                 let id = match tree_id.clone() {
@@ -49,7 +47,7 @@ pub fn save_area(SaveAreaProps { discipline }: &SaveAreaProps) -> Html {
                 let body = match competencies {
                     Ok(val) => {
                         for rating in val.iter() {
-                            update_local_storage(&rating, &id);
+                            update_local_storage(rating, &id);
                         }
 
                         serde_json::to_string(&val).unwrap()
@@ -63,17 +61,17 @@ pub fn save_area(SaveAreaProps { discipline }: &SaveAreaProps) -> Html {
                 let response: Result<reqwasm::http::Response, reqwasm::Error> =
                     request.send().await;
 
-                match response {
-                    Ok(res) => {
-                        if res.ok() {
-                            navigator
-                                .replace_with_query(&Route::Discipline { id: discipline_id.clone() }, &TreeId { id: id.clone() })
-                                .unwrap();
-                        } else {
-                            error!("Saving failed!"); // TODO Better handling
-                        }
+                if let Ok(res) = response {
+                    if res.ok() {
+                        navigator
+                            .replace_with_query(
+                                &Route::Discipline { id: discipline_id },
+                                &TreeId { id: id.clone() },
+                            )
+                            .unwrap();
+                    } else {
+                        error!("Saving failed!"); // TODO Better handling
                     }
-                    _ => {}
                 }
             });
         })

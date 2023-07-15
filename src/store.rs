@@ -47,11 +47,12 @@ impl State {
             rating.path_id,
             rating.area_id,
             rating.comp_id,
-        ).unwrap();
+        )
+        .unwrap();
 
         match &self.tree_id {
             Some(tree_id) => {
-                update_local_storage(&rating, &tree_id);
+                update_local_storage(&rating, tree_id);
             }
             _ => {
                 update_local_storage(&rating, "");
@@ -88,22 +89,19 @@ impl State {
                                 let ratings: Vec<CompetencyRating> = result.json().await.unwrap();
 
                                 let local_competencies =
-                                    get_competencies_from_localstorage(&query_id);
+                                    get_competencies_from_localstorage(query_id);
 
-                                match local_competencies {
-                                    Ok(local_ratings) => {
-                                        if local_ratings.len() != ratings.len() {
-                                            unsaved_items = true;
-                                        }
+                                if let Ok(local_ratings) = local_competencies {
+                                    if local_ratings.len() != ratings.len() {
+                                        unsaved_items = true;
                                     }
-                                    _ => {}
                                 }
 
                                 for rating in ratings.iter() {
-                                    update_local_storage(rating, &query_id);
+                                    update_local_storage(rating, query_id);
                                 }
 
-                                update_from_local_storage(fetched_discs.borrow_mut(), &query_id);
+                                update_from_local_storage(fetched_discs.borrow_mut(), query_id);
                             }
                         }
                         _ => {

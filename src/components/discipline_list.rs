@@ -7,7 +7,7 @@ use yewdux::prelude::use_store;
 
 #[derive(Clone, Properties, PartialEq)]
 pub struct DisciplineListProps {
-    pub id: usize
+    pub id: usize,
 }
 
 #[function_component(DisciplineList)]
@@ -61,8 +61,8 @@ pub fn discipline_list(DisciplineListProps { id }: &DisciplineListProps) -> Html
                     <a class="csv-button" href="#" onclick={copy_as_csv_clicked.clone()}>{"Copy as csv"}</a>
                 </div>
                 <PathList
-                    paths={disc.paths.clone()}
-                    on_rating_changed={on_disc_rating_changed.clone()}
+                    paths={disc.paths}
+                    on_rating_changed={on_disc_rating_changed}
                 />
             </>
             }
